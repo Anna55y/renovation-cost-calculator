@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор ремонта | Евроремонт</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-tools logo-icon"></i>
+                <div>
+                    <h1>Евроремонт</h1>
+                    <p class="tagline">Калькулятор стоимости ремонта квартиры</p>
+                </div>
+            </div>
+        </header>
+        
+        <div class="features">
+            <div class="feature-card">
+                <i class="fas fa-ruler-combined feature-icon"></i>
+                <h3 class="feature-title">Точный расчет</h3>
+                <p class="feature-description">Рассчитайте стоимость ремонта с учетом всех нюансов и материалов</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-calendar-alt feature-icon"></i>
+                <h3 class="feature-title">Сроки от 14 дней</h3>
+                <p class="feature-description">Быстрое выполнение работ с гарантией качества</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-award feature-icon"></i>
+                <h3 class="feature-title">Премиум-материалы</h3>
+                <p class="feature-description">Используем только проверенные материалы от ведущих производителей</p>
+            </div>
+        </div>
+        
+        <div class="calculator-wrapper">
+            <div class="input-section">
+                <h2 class="section-title"><i class="fas fa-calculator"></i> Параметры ремонта</h2>
+                
+                <div class="input-group">
+                    <label class="input-label">Тип ремонта</label>
+                    <div class="radio-group">
+                        <div class="radio-option" data-value="cosmetic">
+                            <input type="radio" id="cosmetic" name="repair-type" value="5000" checked>
+                            <div class="option-details">
+                                <div class="option-title">Косметический</div>
+                                <div class="option-price">Базовая отделка: 5 000 ₽/м²</div>
+                            </div>
+                        </div>
+                        <div class="radio-option" data-value="capital">
+                            <input type="radio" id="capital" name="repair-type" value="10000">
+                            <div class="option-details">
+                                <div class="option-title">Капитальный</div>
+                                <div class="option-price">С заменой коммуникаций: 10 000 ₽/м²</div>
+                            </div>
+                        </div>
+                        <div class="radio-option" data-value="designer">
+                            <input type="radio" id="designer" name="repair-type" value="18000">
+                            <div class="option-details">
+                                <div class="option-title">Дизайнерский</div>
+                                <div class="option-price">Под ключ с материалами: 18 000 ₽/м²</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="area">Площадь квартиры</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="area" min="20" max="200" value="50" step="1">
+                        <span class="unit">м²</span>
+                    </div>
+                    <span class="input-info">Допустимые значения: от 20 до 200 м²</span>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Дополнительные опции</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="demolition" data-percent="15">
+                            <div class="option-details">
+                                <div class="option-title">Демонтаж старой отделки</div>
+                                <div class="option-price">+15% к итоговой стоимости</div>
+                            </div>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="electrics" data-percent="20">
+                            <div class="option-details">
+                                <div class="option-title">Черновая электрика/сантехника</div>
+                                <div class="option-price">+20% к итоговой стоимости</div>
+                            </div>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="tiling">
+                            <div class="option-details">
+                                <div class="option-title">Укладка плитки в ванной</div>
+                                <div class="option-price">+2 000 ₽/м² к площади ванной</div>
+                            </div>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="cleaning" data-fixed="5000">
+                            <div class="option-details">
+                                <div class="option-title">Уборка после ремонта</div>
+                                <div class="option-price">+5 000 ₽ фиксированно</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label" for="bathroom-area">Площадь ванной комнаты (для укладки плитки)</label>
+                    <div class="input-with-unit">
+                        <input type="number" id="bathroom-area" min="1" max="20" value="5" step="0.5" disabled>
+                        <span class="unit">м²</span>
+                    </div>
+                    <span class="input-info">Укажите, если выбрана опция "Укладка плитки в ванной"</span>
+                </div>
+                
+                <div class="validation-message" id="validation-message"></div>
+                
+                <div class="button-group">
+                    <button class="btn btn-primary" id="calculate-btn">
+                        <i class="fas fa-calculator"></i> Рассчитать смету
+                    </button>
+                    <button class="btn btn-secondary" id="request-btn">
+                        <i class="fas fa-file-alt"></i> Оставить заявку
+                    </button>
+                </div>
+            </div>
+            
+            <div class="output-section">
+                <h2 class="section-title"><i class="fas fa-file-invoice-dollar"></i> Детализация сметы</h2>
+                
+                <ul class="estimate-list" id="estimate-list">
+                    <li class="estimate-item">
+                        <span>Выберите параметры и нажмите "Рассчитать смету"</span>
+                        <span class="estimate-value">0 ₽</span>
+                    </li>
+                </ul>
+                
+                <div class="estimate-summary">
+                    <div class="estimate-item total">
+                        <span>Итого:</span>
+                        <span class="estimate-value" id="total-price">0 ₽</span>
+                    </div>
+                </div>
+                
+                <div class="input-info" style="margin-top: 20px;">
+                    <i class="fas fa-info-circle"></i> Расчет является предварительным. Точная стоимость будет определена после выезда замерщика.
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>© 2023 Строительная компания "Евроремонт". Все права защищены.</p>
+            <p>Калькулятор предназначен для предварительного расчета стоимости работ.</p>
+        </footer>
+    </div>
+    
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Оставить заявку</h2>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            
+            <div id="modal-content">
+                <form id="request-form">
+                    <div class="form-group">
+                        <label for="client-name">Ваше имя</label>
+                        <input type="text" id="client-name" placeholder="Иван Иванов" required>
+                        <div class="error-message" id="name-error">Пожалуйста, введите ваше имя</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="client-phone">Телефон</label>
+                        <input type="tel" id="client-phone" placeholder="+7 (900) 123-45-67" required>
+                        <div class="error-message" id="phone-error">Пожалуйста, введите корректный номер телефона</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="client-email">Email</label>
+                        <input type="email" id="client-email" placeholder="example@mail.ru" required>
+                        <div class="error-message" id="email-error">Пожалуйста, введите корректный email</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="client-address">Адрес объекта (если известен)</label>
+                        <input type="text" id="client-address" placeholder="г. Москва, ул. Примерная, д. 1">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Предварительная стоимость по калькулятору</label>
+                        <input type="text" id="modal-total" readonly style="background-color: #f9f9f9;">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <i class="fas fa-paper-plane"></i> Отправить заявку
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
